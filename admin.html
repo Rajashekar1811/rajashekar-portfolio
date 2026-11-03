@@ -1,0 +1,677 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Owner Dashboard | Rajashekar</title>
+
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css">
+  <style>
+    [hidden] {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ADMIN LOGIN SCREEN -->
+  <section class="auth-screen" id="loginScreen">
+    <div class="auth-card">
+
+      <div class="auth-logo">
+        <span>RB</span>
+      </div>
+
+      <h1>Welcome Back</h1>
+      <p>Sign in to your Owner Dashboard</p>
+
+      <form id="adminLoginForm">
+        <div class="auth-input">
+          <i class="fa-solid fa-envelope"></i>
+          <input
+            type="email"
+            id="loginEmail"
+            placeholder="Owner Email Address"
+            autocomplete="username"
+            required
+          >
+        </div>
+
+        <div class="auth-input">
+          <i class="fa-solid fa-lock"></i>
+          <input
+            type="password"
+            id="loginPassword"
+            placeholder="Password"
+            autocomplete="current-password"
+            required
+          >
+        </div>
+
+        <div class="forgot-row">
+          <button type="button" id="forgotPasswordBtn">
+            Forgot Password?
+          </button>
+        </div>
+
+        <button type="submit" class="auth-submit" id="loginBtn">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          Login
+        </button>
+
+        <p id="loginMessage" class="auth-message" role="status"></p>
+      </form>
+
+      <small class="auth-footer">OWNER ACCESS ONLY</small>
+    </div>
+  </section>
+
+
+  <!-- FORGOT PASSWORD SCREEN -->
+  <section class="auth-screen" id="forgotScreen" hidden>
+    <div class="auth-card">
+
+      <div class="auth-logo">
+        <i class="fa-solid fa-key"></i>
+      </div>
+
+      <h1>Forgot Password?</h1>
+      <p>Enter your registered owner email address.</p>
+
+      <form id="forgotPasswordForm">
+        <div class="auth-input">
+          <i class="fa-solid fa-envelope"></i>
+          <input
+            type="email"
+            id="forgotEmail"
+            placeholder="Owner Email Address"
+            autocomplete="email"
+            required
+          >
+        </div>
+
+        <button type="submit" class="auth-submit" id="sendResetBtn">
+          <i class="fa-solid fa-paper-plane"></i>
+          Send Reset Link
+        </button>
+
+        <p id="forgotMessage" class="auth-message" role="status"></p>
+      </form>
+
+      <button type="button" class="auth-back-btn" id="backToLoginBtn">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Login
+      </button>
+
+    </div>
+  </section>
+
+
+  <!-- RESET PASSWORD SCREEN -->
+  <section class="auth-screen" id="resetScreen" hidden>
+    <div class="auth-card">
+
+      <div class="auth-logo">
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+
+      <h1>Reset Password</h1>
+      <p>Create your new account password.</p>
+
+      <form id="resetPasswordForm">
+        <div class="auth-input">
+          <i class="fa-solid fa-lock"></i>
+          <input
+            type="password"
+            id="newPassword"
+            placeholder="New Password"
+            autocomplete="new-password"
+            minlength="8"
+            required
+          >
+        </div>
+
+        <div class="auth-input">
+          <i class="fa-solid fa-lock"></i>
+          <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm New Password"
+            autocomplete="new-password"
+            minlength="8"
+            required
+          >
+        </div>
+
+        <button type="submit" class="auth-submit" id="updatePasswordBtn">
+          <i class="fa-solid fa-check"></i>
+          Update Password
+        </button>
+
+        <p id="resetMessage" class="auth-message" role="status"></p>
+      </form>
+
+    </div>
+  </section>
+
+
+  <!-- OWNER DASHBOARD -->
+  <div class="admin-container" id="adminDashboard" hidden>
+
+    <aside class="sidebar">
+
+      <div class="admin-logo">
+        <span>RB</span>
+        <div>
+          <h2>RAJASHEKAR</h2>
+          <small>OWNER PANEL</small>
+        </div>
+      </div>
+
+      <nav class="admin-nav">
+        <a href="#dashboard" class="active">
+          <i class="fa-solid fa-gauge"></i> Dashboard
+        </a>
+
+        <a href="#about">
+          <i class="fa-solid fa-user-tie"></i> About Me
+        </a>
+
+        <a href="#profilePicture">
+         <i class="fa-solid fa-image"></i> Profile Picture
+        </a>
+
+        <a href="#resume">
+          <i class="fa-solid fa-file-pdf"></i> Manage Resume
+        </a>
+
+        <a href="#projects">
+          <i class="fa-solid fa-code"></i> Projects
+        </a>
+
+        <a href="#skills">
+          <i class="fa-solid fa-laptop-code"></i> Skills
+        </a>
+
+        <a href="#certifications">
+          <i class="fa-solid fa-certificate"></i> Certifications
+        </a>
+
+        <a href="#education">
+          <i class="fa-solid fa-graduation-cap"></i> My Education
+        </a>
+
+        <a href="#experience">
+          <i class="fa-solid fa-briefcase"></i> Experience & Interests
+        </a>
+        
+        <a href="#messages">
+          <i class="fa-solid fa-envelope"></i> Messages
+        </a>
+      </nav>
+
+      <button class="logout-btn" id="logoutBtn">
+        <i class="fa-solid fa-right-from-bracket"></i> Logout
+      </button>
+
+    </aside>
+
+
+    <main class="admin-main">
+
+      <header class="admin-header">
+        <div>
+          <h1>Owner Dashboard</h1>
+          <p>Manage your portfolio website</p>
+        </div>
+
+        <div class="owner-profile">
+          <i class="fa-solid fa-circle-user"></i>
+          <span>Owner</span>
+        </div>
+      </header>
+
+
+      <section class="welcome-card" id="dashboard">
+        <div>
+          <span class="welcome-label">WELCOME BACK</span>
+          <h2>Rajashekar Barapati</h2>
+          <p>Manage your portfolio content from one place.</p>
+        </div>
+
+        <i class="fa-solid fa-layer-group"></i>
+      </section>
+
+
+      <section class="stats-grid">
+
+        <div class="stat-card">
+          <i class="fa-solid fa-code"></i>
+          <h3>Projects</h3>
+          <p id="projectCount">0</p>
+        </div>
+
+        <div class="stat-card">
+          <i class="fa-solid fa-laptop-code"></i>
+          <h3>Skills</h3>
+          <p id="skillCount">0</p>
+        </div>
+
+        <div class="stat-card">
+          <i class="fa-solid fa-certificate"></i>
+          <h3>Certifications</h3>
+          <p id="certCount">0</p>
+        </div>
+
+        <div class="stat-card">
+          <i class="fa-solid fa-envelope"></i>
+          <h3>Messages</h3>
+          <p id="messageCount">0</p>
+        </div>
+
+      </section>
+      
+        <!-- ABOUT ME MANAGEMENT -->
+        <section class="admin-section" id="about">
+
+        <div class="section-heading">
+            <div>
+            <h2>Manage About Me</h2>
+            <p>Add, edit and delete your public About description.</p>
+            </div>
+        </div>
+
+        <form id="aboutForm" class="admin-form">
+
+            <textarea
+            id="aboutDescription"
+            placeholder="Enter your About Me description..."
+            rows="6"
+            required
+            ></textarea>
+
+            <button type="submit" id="aboutSaveBtn">
+            <i class="fa-solid fa-floppy-disk"></i>
+            Save About Description
+            </button>
+
+        </form>
+
+        <div id="aboutList" class="item-list"></div>
+
+        </section>
+
+            <!-- PROFILE PICTURE MANAGEMENT -->
+
+<section class="admin-section" id="profilePicture">
+
+  <div class="section-heading">
+    <div>
+      <h2>Manage Profile Picture</h2>
+      <p>Upload, crop, zoom and adjust your profile picture.</p>
+    </div>
+  </div>
+
+  <form id="profileImageForm" class="admin-form">
+
+    <label for="profileImageInput">Choose Profile Picture</label>
+
+    <input
+      type="file"
+      id="profileImageInput"
+      accept="image/jpeg,image/png,image/webp"
+    >
+
+    <div id="profileEditor" class="profile-editor" hidden>
+      <p class="profile-editor-title">Adjust Your Picture</p>
+
+      <div class="profile-crop-area">
+        <img
+          id="profileImagePreview"
+          alt="Profile picture editor"
+        >
+      </div>
+
+      <div class="profile-editor-controls">
+        <button type="button" id="profileZoomIn">
+          <i class="fa-solid fa-magnifying-glass-plus"></i>
+          Zoom In
+        </button>
+
+        <button type="button" id="profileZoomOut">
+          <i class="fa-solid fa-magnifying-glass-minus"></i>
+          Zoom Out
+        </button>
+
+        <button type="button" id="profileCropReset">
+          <i class="fa-solid fa-rotate-left"></i>
+          Reset
+        </button>
+      </div>
+
+      <p class="profile-editor-help">
+        Drag the image to adjust its position inside the square frame.
+      </p>
+    </div>
+
+    <button type="submit" id="profileImageUploadBtn">
+      <i class="fa-solid fa-upload"></i>
+      Save Profile Picture
+    </button>
+
+    <button type="button" id="profileImageDeleteBtn">
+      <i class="fa-solid fa-trash"></i>
+      Delete Profile Picture
+    </button>
+
+    <p id="profileImageStatus" role="status"></p>
+
+  </form>
+
+  <div class="profile-current-preview">
+    <h3>Current Profile Picture</h3>
+    <img
+      id="currentProfileImage"
+      alt="Current profile picture"
+      hidden
+    >
+  </div>
+
+</section>
+
+            <!-- RESUME MANAGEMENT -->
+
+<section class="admin-section" id="resume">
+
+  <div class="section-heading">
+    <div>
+      <h2>Manage Resume</h2>
+      <p>Upload, preview, replace or delete your resume PDF.</p>
+    </div>
+  </div>
+
+  <form id="resumeForm" class="admin-form">
+
+    <label for="resumeInput">Choose Resume PDF</label>
+
+    <input
+      type="file"
+      id="resumeInput"
+      accept="application/pdf,.pdf"
+      required
+    >
+
+    <p>
+      PDF format only. Maximum file size: 10 MB.
+    </p>
+
+    <button type="submit" id="resumeUploadBtn">
+      <i class="fa-solid fa-cloud-arrow-up"></i>
+      Upload Resume
+    </button>
+
+    <p id="resumeStatus" role="status"></p>
+
+  </form>
+
+  <div class="resume-current-preview">
+
+    <h3>Current Resume</h3>
+
+    <p id="currentResumeName">
+      No resume uploaded yet.
+    </p>
+
+    <div id="resumePreviewContainer" hidden>
+      <iframe
+        id="resumePreview"
+        title="Resume Preview"
+        width="100%"
+        height="500"
+      ></iframe>
+    </div>
+
+    <div class="resume-actions">
+
+      <button
+        type="button"
+        id="resumeReplaceBtn"
+      >
+        <i class="fa-solid fa-rotate"></i>
+        Replace Resume
+      </button>
+
+      <button
+        type="button"
+        id="resumeDeleteBtn"
+      >
+        <i class="fa-solid fa-trash"></i>
+        Delete Resume
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+      <!-- PROJECTS -->
+      <section class="admin-section" id="projects">
+
+        <div class="section-heading">
+          <div>
+            <h2>Manage Projects</h2>
+            <p>Add and manage your portfolio projects.</p>
+          </div>
+        </div>
+
+        <form id="projectForm" class="admin-form">
+          <input type="text" id="projectTitle"
+            placeholder="Project title" required>
+
+          <input type="text" id="projectCategory"
+            placeholder="Project category">
+
+          <textarea id="projectDescription"
+            placeholder="Project description" required></textarea>
+
+          <input type="url" id="projectLink"
+            placeholder="Project link (optional)">
+
+          <button type="submit">
+            <i class="fa-solid fa-plus"></i> Add Project
+          </button>
+        </form>
+
+        <div id="projectList" class="item-list"></div>
+
+      </section>
+
+
+      <!-- SKILLS -->
+      <section class="admin-section" id="skills">
+
+        <div class="section-heading">
+          <div>
+            <h2>Manage Skills</h2>
+            <p>Add skills to your portfolio.</p>
+          </div>
+        </div>
+
+
+<form id="skillForm" class="admin-form">
+
+  <input
+    type="text"
+    id="skillCategory"
+    placeholder="Skill Category (e.g. Frontend Development)"
+    required
+  >
+
+  <textarea
+    id="skillNames"
+    placeholder="Enter skills separated by commas (HTML, CSS, JavaScript, Bootstrap)"
+    required
+  ></textarea>
+
+  <button type="submit">
+    <i class="fa-solid fa-plus"></i> Add Skills
+  </button>
+
+</form>
+
+<div id="skillList" class="item-list"></div>
+
+
+      </section>
+
+
+      <!-- CERTIFICATIONS -->
+      <section class="admin-section" id="certifications">
+
+        <div class="section-heading">
+          <div>
+            <h2>Manage Certifications</h2>
+            <p>Add your certificates.</p>
+          </div>
+        </div>
+
+        <form id="certForm" class="admin-form">
+          <input type="text" id="certTitle"
+            placeholder="Certificate title" required>
+
+          <input type="text" id="certOrganization"
+            placeholder="Organization">
+
+          <button type="submit">
+            <i class="fa-solid fa-plus"></i> Add Certificate
+          </button>
+        </form>
+
+        <div id="certList" class="item-list"></div>
+
+      </section>
+      
+<!-- MY EDUCATION -->
+<section class="admin-section" id="education">
+
+  <div class="section-heading">
+    <div>
+      <h2>My Education</h2>
+      <p>Manage your educational qualifications.</p>
+    </div>
+  </div>
+
+  <form id="educationForm" class="admin-form">
+
+    <input type="text" id="educationQualification"
+      placeholder="Degree / Qualification" required>
+
+    <input type="text" id="educationInstitution"
+      placeholder="College / School Name" required>
+
+    <input type="text" id="educationStartYear"
+      placeholder="Start Year">
+
+    <input type="text" id="educationEndYear"
+      placeholder="End Year">
+
+    <input type="text" id="educationGrade"
+      placeholder="CGPA / GPA">
+
+    <textarea id="educationDescription"
+      placeholder="Education description"></textarea>
+
+    <button type="submit" id="addEducationBtn">
+      <i class="fa-solid fa-plus"></i> Add Education
+    </button>
+
+  </form>
+
+  <div id="educationList" class="item-list"></div>
+
+</section>
+
+
+<!-- EXPERIENCE & INTERESTS -->
+<section class="admin-section" id="experience">
+
+  <div class="section-heading">
+    <div>
+      <h2>Experience & Interests</h2>
+      <p>Manage your professional experience and interests.</p>
+    </div>
+  </div>
+
+  <form id="experienceForm" class="admin-form">
+
+    <select id="experienceType" required>
+      <option value="experience">Professional Experience</option>
+      <option value="interest">Personal Interest</option>
+    </select>
+
+    <input type="text" id="experienceTitle"
+      placeholder="Role / Interest Title" required>
+
+    <input type="text" id="experienceOrganization"
+      placeholder="Company / Organization">
+
+    <textarea id="experienceDescription"
+      placeholder="Description"></textarea>
+
+    <input type="text" id="experienceTechnologies"
+      placeholder="Technologies (comma separated)">
+
+    <input type="text" id="experienceStartDate"
+      placeholder="Start Date / Year">
+
+    <input type="text" id="experienceEndDate"
+      placeholder="End Date / Year">
+
+    <label>
+      <input type="checkbox" id="experienceCurrent">
+      Currently Working
+    </label>
+
+    <button type="submit">
+      <i class="fa-solid fa-plus"></i> Add Experience / Interest
+    </button>
+
+  </form>
+
+  <div id="experienceList" class="item-list"></div>
+
+</section>
+
+
+      <!-- MESSAGES -->
+      <section class="admin-section" id="messages">
+
+        <div class="section-heading">
+          <div>
+            <h2>Contact Messages</h2>
+            <p>Messages received from visitors.</p>
+          </div>
+        </div>
+
+        <div id="messageList" class="item-list"></div>
+
+      </section>
+
+    </main>
+  </div>
+
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
+  <script src="admin.js"></script>
+
+</body>
+</html>
